@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-Narendra
 import mavutil , re
 
 msg_desc = pymavlink.mavutil.mavlink_connection("udp::14555", dialect="array_test")
