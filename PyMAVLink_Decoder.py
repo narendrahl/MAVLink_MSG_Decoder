@@ -1,5 +1,7 @@
 
 # Usage ./MAVLink_MSG_Decoder <USB_PORT> <BAUDRATE>
+#  OR
+# Usage ./MAVLink_MSG_Decoder <USB_PORT> <BAUDRATE>  > logfile
 
 #!/usr/bin/python
 
@@ -20,7 +22,7 @@ while True:
    if mesg != None:
        mesg = str(mesg)
        mesg = mesg.strip()
-       print mesg
+#       print mesg               # Uncomment this to LOG messages
        if (re.search(invalid_crc,mesg)):
          COUNT += 1
 #         print msg
