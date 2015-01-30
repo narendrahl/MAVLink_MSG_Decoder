@@ -1,25 +1,38 @@
-#!/usr/bin/env python
 
-import mavutil , re
 
-msg_desc = pymavlink.mavutil.mavlink_connection("udp::14555", dialect="array_test")
+#!/usr/bin/python
 
-count = 0
+import sys , re
+
+from pymavlink import mavutil
+
+#PORT = raw_input("INPUT PORT: ")
+
+#BAUDRATE = raw_input("INPUT BAUDRATE: ")
+
+invalid_crc = "BAD_DATA"
+#invalid_crc = "invalid MAVLink"
+
+master = mavutil.mavlink_connection(sys.argv[1],baud=int(sys.argv[2]))
+
+COUNT = 0
 
 while True:
 
-   msg = msg_desc.recv_msg()
+   msg = master.recv_msg()
 
-   if msg is not None:
+   if msg != None:
+       msg = str(msg)
+       msg = msg.strip()
+       print msg
+       if (re.search(invalid_crc,msg)):
+         COUNT += 1
+#         print msg
+         print COUNT
 
-     bad_CRC = re.search("BAD CRC",msg)
+#print COUNT
 
-     if bad_CRC is not None:
-           
-         count += 1
-         display = "PACKETS WITH BAD CRCs " + str(count)
-         print display
-       
+
 
 
 
